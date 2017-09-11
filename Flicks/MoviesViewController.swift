@@ -8,13 +8,16 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
+    UISearchBarDelegate {
 
+    @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.searchView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -32,6 +35,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.textLabel?.text = "row \(indexPath.row)"
         print("row \(indexPath.row)")
         return cell
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        print(searchText);
     }
     
     /*
