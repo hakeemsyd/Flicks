@@ -49,6 +49,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		32527AA61F66640B006DD828 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				32832E951F665A870030C7D2 /* ViewController.swift */,
+				32832E931F665A870030C7D2 /* AppDelegate.swift */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		32527AA71F666410006DD828 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				32832E971F665A870030C7D2 /* Main.storyboard */,
+				32832E9C1F665A870030C7D2 /* LaunchScreen.storyboard */,
+				32832E9A1F665A870030C7D2 /* Assets.xcassets */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		32527AA81F666481006DD828 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				32832E9F1F665A870030C7D2 /* Info.plist */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
 		32832E871F665A870030C7D2 = {
 			isa = PBXGroup;
 			children = (
@@ -70,12 +97,9 @@
 		32832E921F665A870030C7D2 /* Flicks */ = {
 			isa = PBXGroup;
 			children = (
-				32832E931F665A870030C7D2 /* AppDelegate.swift */,
-				32832E951F665A870030C7D2 /* ViewController.swift */,
-				32832E971F665A870030C7D2 /* Main.storyboard */,
-				32832E9A1F665A870030C7D2 /* Assets.xcassets */,
-				32832E9C1F665A870030C7D2 /* LaunchScreen.storyboard */,
-				32832E9F1F665A870030C7D2 /* Info.plist */,
+				32527AA81F666481006DD828 /* config */,
+				32527AA71F666410006DD828 /* resources */,
+				32527AA61F66640B006DD828 /* src */,
 			);
 			path = Flicks;
 			sourceTree = "<group>";
@@ -387,6 +411,7 @@
 				32832EA41F665A870030C7D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
