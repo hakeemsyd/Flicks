@@ -13,17 +13,22 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    var mMovies : [NSDictionary] = []
+    var mSearchQuery = ""
+    var mIsSearchInProgress = false
+    var mSearchTask: URLSessionDataTask!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self
-        // Do any additional setup after loading the view.
+        
+        initTableView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -33,12 +38,42 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
         cell.textLabel?.text = "row \(indexPath.row)"
-        print("row \(indexPath.row)")
+        //print("row \(indexPath.row)")
         return cell
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        print(searchText);
+        mSearchQuery = searchText
+        initTableView()
+    }
+    
+    func initTableView(){
+        fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
+            self.tableView.reloadData()
+            self.mIsSearchInProgress = false;
+            print("Finished search")
+        });
+    }
+    
+    func fetchData(searchText: String, handler: @escaping (Data?, URLResponse?, Error?) -> Swift.Void) {
+        print("Search = \(searchText)")
+        if (mIsSearchInProgress) {
+            print("Cancelling task \(mSearchTask.state)")
+            mSearchTask?.cancel()
+            mIsSearchInProgress = false;
+        }
+        
+        let url = URL(string: "\(Constants.BASE_URL)search?q=\(searchText)api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")
+        let request = URLRequest(url: url!)
+        
+        // Configure session so that completion handler is executed on main UI thread
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        mSearchTask = session.dataTask(
+            with: request as URLRequest,
+            completionHandler: handler);
+        
+        mIsSearchInProgress = true;
+        mSearchTask.resume()
     }
     
     /*
