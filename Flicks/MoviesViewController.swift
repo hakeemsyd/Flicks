@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import AFNetworking
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
     UISearchBarDelegate {
 
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
     var mMovies : [NSDictionary] = []
     var mSearchQuery = ""
     var mIsSearchInProgress = false
@@ -32,14 +34,40 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 20
+        print("Movies Count: \(mMovies.count)")
+        return mMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
-        cell.textLabel?.text = "row \(indexPath.row)"
-        //print("row \(indexPath.row)")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
+        
+        let movie = mMovies[indexPath.row]
+        let title = movie["title"] as? String
+        let synopsis = movie["overview"] as? String
+        
+        var posterUrl: URL!
+        if let path = movie["poster_path"] {
+            let p = "\(Constants.BASE_POSTER_URL)\(path)"
+            print(p)
+            posterUrl = URL(string: p )!
+        }
+        
+        cell.posterView.setImageWith(posterUrl)
+        cell.titleLabel.text = title;
+        cell.synopsisLabel.text = synopsis;
+        print("row \(indexPath.row)")
         return cell
+    }
+    
+    func parseMovies(data: Data? ) -> [NSDictionary] {
+        if let data = data {
+            if let responseDictionary = try! JSONSerialization.jsonObject(
+                with: data, options:[]) as? NSDictionary {
+                let movies = responseDictionary["results"] as! [NSDictionary]
+                return movies;
+            }
+        }
+        return [];
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
@@ -49,8 +77,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func initTableView(){
         fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
-            self.tableView.reloadData()
             self.mIsSearchInProgress = false;
+            self.mMovies = self.parseMovies(data: data)
+            self.tableView.reloadData()
             print("Finished search")
         });
     }
@@ -63,7 +92,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             mIsSearchInProgress = false;
         }
         
-        let url = URL(string: "\(Constants.BASE_URL)search?q=\(searchText)api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")
+        let url = URL(string: "\(Constants.BASE_URL)\(Constants.PATH_NOW_PLAYING)?\(Constants.API_KEY)")
         let request = URLRequest(url: url!)
         
         // Configure session so that completion handler is executed on main UI thread
