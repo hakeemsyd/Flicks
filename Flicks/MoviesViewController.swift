@@ -45,14 +45,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let title = movie["title"] as? String
         let synopsis = movie["overview"] as? String
         
-        var posterUrl: URL!
+    
         if let path = movie["poster_path"] {
             let p = "\(Constants.BASE_POSTER_URL)\(path)"
             print(p)
-            posterUrl = URL(string: p )!
+            if let posterUrl = URL(string: p){
+                cell.posterView.setImageWith(posterUrl)
+            }
         }
-        
-        cell.posterView.setImageWith(posterUrl)
+    
         cell.titleLabel.text = title;
         cell.synopsisLabel.text = synopsis;
         print("row \(indexPath.row)")
@@ -92,7 +93,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             mIsSearchInProgress = false;
         }
         
-        let url = URL(string: "\(Constants.BASE_URL)\(Constants.PATH_NOW_PLAYING)?\(Constants.API_KEY)")
+        var url: URL!
+        if (searchText.isEmpty){
+            url = URL(string: "\(Constants.BASE_URL_NOW_PLAYING)?\(Constants.API_KEY)")
+        } else {
+            url = URL(string: "\(Constants.BASE_URL_SEARCH)?\(Constants.API_KEY)&query=\(searchText)")
+        }
         let request = URLRequest(url: url!)
         
         // Configure session so that completion handler is executed on main UI thread
