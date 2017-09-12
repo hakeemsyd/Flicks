@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="9Gf-fK-Owi">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,15 +18,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" id="vpr-Mk-GQp">
-                                <rect key="frame" x="0.0" y="75" width="375" height="592"/>
+                                <rect key="frame" x="0.0" y="133" width="375" height="534"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="125" id="kEh-vx-XwH" customClass="MovieTableViewCell" customModule="Flicks" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="125" id="kEh-vx-XwH" customClass="MovieTableViewCell" customModule="Flicks" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEh-vx-XwH" id="bNv-I5-NGQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="124.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="UAu-OM-tbe">
@@ -54,12 +54,13 @@
                                             <outlet property="posterView" destination="UAu-OM-tbe" id="k20-QS-4sD"/>
                                             <outlet property="synopsisLabel" destination="fah-vV-hSt" id="loW-PG-C87"/>
                                             <outlet property="titleLabel" destination="0W4-2P-xu5" id="coh-1J-gIH"/>
+                                            <segue destination="4xg-TJ-dyH" kind="push" id="FJZ-MM-QK3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" id="v4c-DD-wAY">
-                                <rect key="frame" x="16" y="21" width="343" height="44"/>
+                                <rect key="frame" x="16" y="77" width="343" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -67,6 +68,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.9976617693901062" green="0.70297569036483765" blue="0.020845862105488777" alpha="0.8008347602739726" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="d7f-gg-FQc"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="2T7-nx-sIh" id="sca-3a-wci"/>
                         <outlet property="searchView" destination="v4c-DD-wAY" id="EQ4-ES-6YK"/>
@@ -82,6 +84,39 @@
                         <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="s3U-8s-SHF"/>
                     </connections>
                 </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="185.5" y="44.5"/>
+        </scene>
+        <!--Movie Details View Controller-->
+        <scene sceneID="hI8-sQ-dF6">
+            <objects>
+                <viewController id="4xg-TJ-dyH" customClass="MovieDetailsViewController" customModule="Flicks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AEq-QQ-bYj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AmO-fD-hIE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rag-7x-Hrd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="691.5" y="44.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qCc-FQ-2y2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Gf-fK-Owi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N8i-5b-Jji">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="LQO-WW-5Zy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="USh-rM-FoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-401.5" y="44.5"/>
         </scene>
