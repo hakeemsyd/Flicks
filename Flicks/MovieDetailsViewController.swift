@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import AFNetworking
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var posterImage: UIImageView!
+    var posterPath = ""
+    var mMovie: [String: Any] = [String: Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let path = mMovie["backdrop_path"] {
+            let p = "\(Constants.BASE_POSTER_URL)250\(path)"
+            print(p)
+            if let posterUrl = URL(string: p){
+                posterImage.setImageWith(posterUrl)
+            }
+        }
 
+        
+        posterImage.setImageWith(URL(string: "\(Constants.BASE_POSTER_URL_W500)\(posterPath)")!)
         // Do any additional setup after loading the view.
     }
 

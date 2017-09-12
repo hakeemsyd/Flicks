@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
     UISearchBarDelegate {
@@ -25,6 +26,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self
+        
+        // pull to referesh
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
         
         initTableView()
     }
@@ -56,8 +63,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
         cell.titleLabel.text = title;
         cell.synopsisLabel.text = synopsis;
-        print("row \(indexPath.row)")
+        //print("row \(indexPath.row)")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated:true)
     }
     
     func parseMovies(data: Data? ) -> [NSDictionary] {
@@ -77,11 +88,27 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func initTableView(){
+        print("Started init");
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
             self.mIsSearchInProgress = false;
             self.mMovies = self.parseMovies(data: data)
             self.tableView.reloadData()
+            MBProgressHUD.hide(for: self.view, animated: true)
             print("Finished search")
+        });
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        print("Started pull referesh")
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
+            self.mIsSearchInProgress = false;
+            self.mMovies = self.parseMovies(data: data)
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+            MBProgressHUD.hide(for: self.view, animated: true)
+            print("Finished pull refresh")
         });
     }
     
@@ -111,14 +138,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         mSearchTask.resume()
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destinationViewController = segue.destination as! MovieDetailsViewController
+        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+        destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
     }
-    */
+ 
 
 }
