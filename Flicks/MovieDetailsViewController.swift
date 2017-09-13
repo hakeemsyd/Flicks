@@ -11,6 +11,11 @@ import AFNetworking
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var overViewLabel: UILabel!
+    @IBOutlet weak var lengthLabel: UILabel!
+    @IBOutlet weak var votinAverageLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var posterImage: UIImageView!
     var posterPath = ""
     var mMovie: [String: Any] = [String: Any]()
@@ -23,7 +28,13 @@ class MovieDetailsViewController: UIViewController {
                 posterImage.setImageWith(posterUrl)
             }
         }
-        // Do any additional setup after loading the view.
+        
+        movieNameLabel.text = mMovie["title"] as? String
+        dateLabel.text = mMovie["release_date"] as? String
+        let avg = mMovie["vote_average"] as? Float
+        votinAverageLabel.text = "\(avg!) %"
+        lengthLabel.text = "2 hours 36 minutes"
+        overViewLabel.text = mMovie["overview"] as? String
     }
 
     override func didReceiveMemoryWarning() {
