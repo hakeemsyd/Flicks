@@ -24,11 +24,9 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let path = mMovie["poster_path"] {
-            let p = "\(Constants.BASE_POSTER_URL_ORIGINAL)\(path)"
-            if let posterUrl = URL(string: p){
-                print(p)
-                posterImage.setImageWith(posterUrl)
-            }
+            let p = "\(Utility.BASE_POSTER_URL_ORIGINAL)\(path)"
+            Utility.loadPhoto(withUrl: p, into: posterImage)
+            print(p)
         }
         
         //detailsContainerView.sizeToFit()

@@ -57,11 +57,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
     
         if let path = movie["poster_path"] {
-            let p = "\(Constants.BASE_POSTER_URL)w185\(path)"
+            let p = "\(Utility.BASE_POSTER_URL)w185\(path)"
+            Utility.loadPhoto(withUrl: "\(Utility.BASE_POSTER_URL)w185\(path)", into: cell.posterView)
             print(p)
-            if let posterUrl = URL(string: p){
-                cell.posterView.setImageWith(posterUrl)
-            }
         }
     
         cell.titleLabel.text = title;
@@ -151,9 +149,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         var url: URL!
         if (searchText.isEmpty){
-            url = URL(string: "\(Constants.BASE_URL_NOW_PLAYING)?\(Constants.API_KEY)")
+            url = URL(string: "\(Utility.BASE_URL_NOW_PLAYING)?\(Utility.API_KEY)")
         } else {
-            url = URL(string: "\(Constants.BASE_URL_SEARCH)?\(Constants.API_KEY)&query=\(searchText)")
+            url = URL(string: "\(Utility.BASE_URL_SEARCH)?\(Utility.API_KEY)&query=\(searchText)")
         }
         
         if (url != nil){
