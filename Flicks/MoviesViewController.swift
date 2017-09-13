@@ -112,6 +112,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             print("Cancelling task \(mSearchTask.state)")
             mSearchTask?.cancel()
             mIsSearchInProgress = false;
+            refreshControl.endRefreshing()
             MBProgressHUD.hide(for: self.view, animated: true)
         }
         
