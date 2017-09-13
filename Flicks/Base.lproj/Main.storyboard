@@ -110,7 +110,7 @@
                                 <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="8O4-IT-YFz">
+                            <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="8O4-IT-YFz">
                                 <rect key="frame" x="0.0" y="358" width="375" height="309"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -172,7 +172,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="AmO-fD-hIE"/>
                     <connections>
+                        <outlet property="containerScrollView" destination="8O4-IT-YFz" id="1ye-jc-3Vg"/>
                         <outlet property="dateLabel" destination="Kpu-9N-Blh" id="RZ0-qr-Nkf"/>
+                        <outlet property="detailsContainerView" destination="Tcw-Yg-39v" id="f2F-MG-L6L"/>
                         <outlet property="lengthLabel" destination="c1B-dx-FzO" id="Ay0-hG-e9I"/>
                         <outlet property="movieNameLabel" destination="riK-YE-ifg" id="t7s-AP-WVI"/>
                         <outlet property="overViewLabel" destination="Znz-Bv-8yH" id="n8W-3x-lr7"/>

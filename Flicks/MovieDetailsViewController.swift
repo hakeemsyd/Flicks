@@ -11,6 +11,8 @@ import AFNetworking
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var containerScrollView: UIScrollView!
+    @IBOutlet weak var detailsContainerView: UIView!
     @IBOutlet weak var overViewLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
     @IBOutlet weak var votinAverageLabel: UILabel!
@@ -29,12 +31,15 @@ class MovieDetailsViewController: UIViewController {
             }
         }
         
+        //detailsContainerView.sizeToFit()
         movieNameLabel.text = mMovie["title"] as? String
         dateLabel.text = mMovie["release_date"] as? String
         let avg = mMovie["vote_average"] as? Float
         votinAverageLabel.text = "\(avg!) %"
         lengthLabel.text = "2 hours 36 minutes"
         overViewLabel.text = mMovie["overview"] as? String
+        //overViewLabel.sizeToFit()
+        containerScrollView.contentSize = CGSize(width: detailsContainerView.bounds.width * 2, height: detailsContainerView.bounds.height * 2)
     }
 
     override func didReceiveMemoryWarning() {
