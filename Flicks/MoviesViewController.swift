@@ -54,7 +54,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
     
         if let path = movie["poster_path"] {
-            let p = "\(Constants.BASE_POSTER_URL)\(path)"
+            let p = "\(Constants.BASE_POSTER_URL)w185\(path)"
             print(p)
             if let posterUrl = URL(string: p){
                 cell.posterView.setImageWith(posterUrl)

@@ -16,10 +16,10 @@ class MovieDetailsViewController: UIViewController {
     var mMovie: [String: Any] = [String: Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let path = mMovie["backdrop_path"] {
-            let p = "\(Constants.BASE_POSTER_URL)250\(path)"
-            print(p)
+        if let path = mMovie["poster_path"] {
+            let p = "\(Constants.BASE_POSTER_URL_ORIGINAL)\(path)"
             if let posterUrl = URL(string: p){
+                print(p)
                 posterImage.setImageWith(posterUrl)
             }
         }
