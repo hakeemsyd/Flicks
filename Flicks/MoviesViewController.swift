@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyTableMessage: UILabel!
     
     var mMovies : [NSDictionary] = []
     var mSearchQuery = ""
@@ -42,6 +43,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         print("Movies Count: \(mMovies.count)")
+        let count = mMovies.count
+        emptyTableMessage.isHidden = count == 0 ? false : true
         return mMovies.count
     }
     

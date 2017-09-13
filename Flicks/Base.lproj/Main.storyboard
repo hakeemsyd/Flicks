@@ -68,11 +68,19 @@
                                 <color key="barTintColor" red="0.99766176939999995" green="0.70297569039999996" blue="0.020845862109999998" alpha="0.8008347603" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No results!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4B6-vw-S9g">
+                                <rect key="frame" x="46" y="108" width="297" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9976617693901062" green="0.70297569036483765" blue="0.020845862105488777" alpha="0.8008347602739726" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="d7f-gg-FQc"/>
                     <connections>
+                        <outlet property="emptyTableMessage" destination="4B6-vw-S9g" id="3yD-bj-k0A"/>
                         <outlet property="searchDisplayController" destination="2T7-nx-sIh" id="sca-3a-wci"/>
                         <outlet property="searchView" destination="v4c-DD-wAY" id="EQ4-ES-6YK"/>
                         <outlet property="tableView" destination="vpr-Mk-GQp" id="Nyu-7r-XFj"/>
