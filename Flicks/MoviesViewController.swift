@@ -43,8 +43,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         print("Movies Count: \(mMovies.count)")
-        let count = mMovies.count
-        emptyTableMessage.isHidden = count == 0 ? false : true
+        //let count = mMovies.count
+        //emptyTableMessage.isHidden = count == 0 ? false : true
         return mMovies.count
     }
     
@@ -101,6 +101,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
+            self.setErrorLabel(error);
             self.mIsSearchInProgress = false;
             self.mMovies = self.parseMovies(data: data)
             self.tableView.reloadData()
@@ -121,6 +122,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         fetchData(searchText: mSearchQuery, handler: {(data, response, error) in
+            self.setErrorLabel(error);
             self.mIsSearchInProgress = false;
             self.mMovies = self.parseMovies(data: data)
             self.tableView.reloadData()
@@ -128,6 +130,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             MBProgressHUD.hide(for: self.view, animated: true)
             print("Finished pull refresh")
         });
+    }
+    
+    func setErrorLabel(_ error: Error?){
+        if error != nil {
+            showErrorLabel(with: "No network!", isHidden: false)
+        }
+        else {
+            showErrorLabel(with: "", isHidden: true)
+        }
+    }
+    
+    func showErrorLabel(with message: String?, isHidden hidden: Bool){
+        emptyTableMessage.isHidden = hidden
+        emptyTableMessage.text = message
     }
     
     func fetchData(searchText: String, handler: @escaping (Data?, URLResponse?, Error?) -> Swift.Void) {
