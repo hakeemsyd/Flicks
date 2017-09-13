@@ -23,9 +23,6 @@ class MovieDetailsViewController: UIViewController {
                 posterImage.setImageWith(posterUrl)
             }
         }
-
-        
-        posterImage.setImageWith(URL(string: "\(Constants.BASE_POSTER_URL_W500)\(posterPath)")!)
         // Do any additional setup after loading the view.
     }
 
