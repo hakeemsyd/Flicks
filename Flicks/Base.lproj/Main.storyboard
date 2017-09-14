@@ -123,7 +123,7 @@
                                 <rect key="frame" x="276" y="8" width="83" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="First"/>
+                                    <segment title="List"/>
                                     <segment title="Grid"/>
                                 </segments>
                                 <connections>
