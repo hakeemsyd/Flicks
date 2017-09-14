@@ -15,6 +15,7 @@
 		32832E991F665A870030C7D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32832E971F665A870030C7D2 /* Main.storyboard */; };
 		32832E9B1F665A870030C7D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32832E9A1F665A870030C7D2 /* Assets.xcassets */; };
 		32832E9E1F665A870030C7D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32832E9C1F665A870030C7D2 /* LaunchScreen.storyboard */; };
+		32D936FE1F6A36A70007995B /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D936FD1F6A36A70007995B /* MovieCollectionViewCell.swift */; };
 		7B14CAB2B838D4AA22453D98 /* Pods_Flicks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8BD40B013DDCBF222F4D41D /* Pods_Flicks.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		32832E9A1F665A870030C7D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32832E9D1F665A870030C7D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32832E9F1F665A870030C7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32D936FD1F6A36A70007995B /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		A8BD40B013DDCBF222F4D41D /* Pods_Flicks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flicks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 				32527AAD1F66794E006DD828 /* Utility.swift */,
 				32580F7A1F6783340041DCAB /* MovieTableViewCell.swift */,
 				32580F7C1F67E8DE0041DCAB /* MovieDetailsViewController.swift */,
+				32D936FD1F6A36A70007995B /* MovieCollectionViewCell.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				32580F7D1F67E8DE0041DCAB /* MovieDetailsViewController.swift in Sources */,
 				32832E941F665A870030C7D2 /* AppDelegate.swift in Sources */,
 				32527AAA1F6664EC006DD828 /* MoviesViewController.swift in Sources */,
+				32D936FE1F6A36A70007995B /* MovieCollectionViewCell.swift in Sources */,
 				32580F7B1F6783340041DCAB /* MovieTableViewCell.swift in Sources */,
 				32527AAE1F66794E006DD828 /* Utility.swift in Sources */,
 			);

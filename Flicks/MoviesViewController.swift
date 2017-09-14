@@ -11,8 +11,11 @@ import AFNetworking
 import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
-    UISearchBarDelegate {
+    UISearchBarDelegate, UICollectionViewDataSource,
+    UICollectionViewDelegate{
 
+    @IBOutlet weak var viewConfig: UISegmentedControl!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyTableMessage: UILabel!
@@ -24,11 +27,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let viewMode = UserDefaults.standard.integer(forKey: Utility.KEY_DEFAULT_VIEW_MODE)
+        viewConfig.selectedSegmentIndex = viewMode
+        if viewMode == 0 {
+            tableView.isHidden = false
+            collectionView.isHidden = true
+        } else if viewMode == 1 {
+            tableView.isHidden = true
+            collectionView.isHidden = false
+        }
+        
         self.navigationItem.title = "Movies"
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self
         
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
         // pull to referesh
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -44,8 +60,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         print("Movies Count: \(mMovies.count)")
-        //let count = mMovies.count
-        //emptyTableMessage.isHidden = count == 0 ? false : true
         return mMovies.count
     }
     
@@ -114,6 +128,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.mIsSearchInProgress = false;
             self.mMovies = self.parseMovies(data: data)
             self.tableView.reloadData()
+            self.collectionView.reloadData()
             MBProgressHUD.hide(for: self.view, animated: true)
             print("Finished init")
         });
@@ -135,6 +150,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.mIsSearchInProgress = false;
             self.mMovies = self.parseMovies(data: data)
             self.tableView.reloadData()
+            self.collectionView.reloadData()
             refreshControl.endRefreshing()
             MBProgressHUD.hide(for: self.view, animated: true)
             print("Finished pull refresh")
@@ -184,9 +200,50 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationViewController = segue.destination as! MovieDetailsViewController
-        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
-        destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
+        if viewConfig.selectedSegmentIndex == 0 {
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+            destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
+        } else if viewConfig.selectedSegmentIndex == 1 {
+            let indexPath = collectionView.indexPath(for: sender as! UICollectionViewCell)!
+            destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
+        }
     }
  
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return mMovies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
+        
+        let movie = mMovies[indexPath.row]
+        let title = movie["title"] as? String
+        
+        cell.movieTitle.text = title
+        if let path = movie["poster_path"] {
+            print("collectionView: path: \(path)")
+            Utility.loadPhoto(withUrl: "\(Utility.BASE_POSTER_URL)w185\(path)" , into: cell.posterView)
+        }
+        return cell
+    }
 
+    @IBAction func onViewConfigChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex
+        {
+        case 0:
+            tableView.isHidden = false
+            collectionView.isHidden = true
+            break
+        case 1:
+            tableView.isHidden = true
+            collectionView.isHidden = false
+            break
+        default:
+            tableView.isHidden = false
+            collectionView.isHidden = true
+            break
+        }
+    }
 }

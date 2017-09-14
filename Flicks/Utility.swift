@@ -17,9 +17,9 @@ struct Utility {
     static let BASE_POSTER_URL_ORIGINAL =  "https://image.tmdb.org/t/p/original"
     static let API_KEY = "api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
     static let BASE_URL_SEARCH = "https://api.themoviedb.org/3/search/movie"
+    static let KEY_DEFAULT_VIEW_MODE = "default_view_mode";
     
     static func loadPhoto(withUrl url: String, into view: UIImageView){
-        //let imageUrl = "https://i.imgur.com/tGbaZCY.jpg"
         let imageRequest = URLRequest(url: URL(string: url)!)
         
         view.setImageWith(
