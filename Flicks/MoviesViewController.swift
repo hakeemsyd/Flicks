@@ -50,6 +50,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
+        
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.red
         cell.selectedBackgroundView = backgroundView
@@ -73,6 +74,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated:true)
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        if let cell  = tableView.cellForRow(at: indexPath){
+            cell.contentView.backgroundColor = UIColor.gray
+        }
     }
     
     func parseMovies(data: Data? ) -> [NSDictionary] {
