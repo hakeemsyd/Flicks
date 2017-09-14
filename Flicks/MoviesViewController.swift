@@ -24,6 +24,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Movies"
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self

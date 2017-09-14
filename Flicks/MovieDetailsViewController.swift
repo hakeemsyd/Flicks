@@ -31,6 +31,8 @@ class MovieDetailsViewController: UIViewController {
         
         //detailsContainerView.sizeToFit()
         movieNameLabel.text = mMovie["title"] as? String
+        self.navigationItem.title = movieNameLabel.text
+        
         dateLabel.text = mMovie["release_date"] as? String
         let avg = mMovie["vote_average"] as? Float
         votinAverageLabel.text = "\(avg!) %"
