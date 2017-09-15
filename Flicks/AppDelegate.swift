@@ -35,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //nowPlayingViewController.tabBarItem.image = UIImage(named: "heart")
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [nowPlayingViewController, topRatedViewController]
+        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
+        
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
