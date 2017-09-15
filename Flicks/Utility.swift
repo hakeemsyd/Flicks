@@ -11,6 +11,7 @@ import Foundation
 
 struct Utility {
     static let BASE_URL_NOW_PLAYING = "https://api.themoviedb.org/3/movie/now_playing"
+    static let BASE_URL = "https://api.themoviedb.org/3/movie/"
     static let BASE_POSTER_URL = "https://image.tmdb.org/t/p/"
     static let BASE_POSTER_URL_W185 =  "https://image.tmdb.org/t/p/w185"
     static let BASE_POSTER_URL_W500 =  "https://image.tmdb.org/t/p/w500"

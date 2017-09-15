@@ -24,6 +24,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var mSearchQuery = ""
     var mIsSearchInProgress = false
     var mSearchTask: URLSessionDataTask!
+    var endPoint = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,9 +177,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         var url: URL!
         if (searchText.isEmpty){
-            url = URL(string: "\(Utility.BASE_URL_NOW_PLAYING)?\(Utility.API_KEY)")
+            url = URL(string: "\(Utility.BASE_URL)\(endPoint)?\(Utility.API_KEY)")
         } else {
-            url = URL(string: "\(Utility.BASE_URL_SEARCH)?\(Utility.API_KEY)&query=\(searchText)")
+            url = URL(string: "\(Utility.BASE_URL_SEARCH)\(endPoint)?\(Utility.API_KEY)&query=\(searchText)")
         }
         
         if (url != nil){
@@ -200,6 +201,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationViewController = segue.destination as! MovieDetailsViewController
+        
+        /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let movieNavigationViewController = storyboard.instantiateViewController(withIdentifier:
+            "MovieNavigationController") as! UINavigationController
+        let nowPlayingViewController = movieNavigationViewController.topViewController as! MoviesViewController*/
+        
+        
         if viewConfig.selectedSegmentIndex == 0 {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
@@ -207,8 +215,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             let indexPath = collectionView.indexPath(for: sender as! UICollectionViewCell)!
             destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
         }
-        
-        
     }
  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int

@@ -17,8 +17,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    
-        let vc1 = storyboard.instantiateViewController(withIdentifier:
+        
+        let nowPlayingNavigationController = storyboard.instantiateViewController(withIdentifier:
+            "MovieNavigationController") as! UINavigationController
+        let nowPlayingViewController = nowPlayingNavigationController.topViewController as! MoviesViewController
+        nowPlayingViewController.endPoint = "now_playing"
+        nowPlayingViewController.tabBarItem.title = "Now Playing"
+        nowPlayingNavigationController.view.backgroundColor = UIColor.orange
+        //nowPlayingViewController.tabBarItem.image = UIImage(named: "heart")
+        
+        let topRatedNavigationController = storyboard.instantiateViewController(withIdentifier:
+            "MovieNavigationController") as! UINavigationController
+        let topRatedViewController = topRatedNavigationController.topViewController as! MoviesViewController
+        topRatedViewController.endPoint = "top_rated"
+        topRatedViewController.tabBarItem.title = "Top Rated"
+        topRatedNavigationController.view.backgroundColor = UIColor.purple
+        //nowPlayingViewController.tabBarItem.image = UIImage(named: "heart")
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [nowPlayingViewController, topRatedViewController]
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
+        /*let vc1 = storyboard.instantiateViewController(withIdentifier:
                     "MoviesViewController") as! MoviesViewController
         //vc1.view.backgroundColor = UIColor.orange
         vc1.tabBarItem.title = "Now Playing"
@@ -31,16 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vc2.tabBarItem.title = "Top Rated"
         vc2.tabBarItem.image = UIImage(named: "star")
         
-        
-        
         // Set up the Tab Bar Controller to have two tabs
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [vc1, vc2]
-        tabBarController.navigationController = ;
+       // tabBarController.navigationController = movieNavigationViewController;
         
         // Make the Tab Bar Controller the root view controller
         window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible()*/
         return true
     }
 
