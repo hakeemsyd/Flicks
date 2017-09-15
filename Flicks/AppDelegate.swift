@@ -15,7 +15,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    
+        let vc1 = storyboard.instantiateViewController(withIdentifier:
+                    "MoviesViewController") as! MoviesViewController
+        //vc1.view.backgroundColor = UIColor.orange
+        vc1.tabBarItem.title = "Now Playing"
+        vc1.tabBarItem.image = UIImage(named: "heart")
+        
+        // Set up the second View Controller
+        let vc2 = storyboard.instantiateViewController(withIdentifier:
+            "MoviesViewController") as! MoviesViewController
+        //vc2.view.backgroundColor = UIColor.purple
+        vc2.tabBarItem.title = "Top Rated"
+        vc2.tabBarItem.image = UIImage(named: "star")
+        
+        
+        
+        // Set up the Tab Bar Controller to have two tabs
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [vc1, vc2]
+        tabBarController.navigationController = ;
+        
+        // Make the Tab Bar Controller the root view controller
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
         return true
     }
 

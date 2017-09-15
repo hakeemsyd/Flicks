@@ -207,6 +207,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             let indexPath = collectionView.indexPath(for: sender as! UICollectionViewCell)!
             destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
         }
+        
+        
     }
  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
