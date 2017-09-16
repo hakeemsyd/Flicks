@@ -24,10 +24,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var mSearchQuery = ""
     var mIsSearchInProgress = false
     var mSearchTask: URLSessionDataTask!
+    var endPoint = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let viewMode = UserDefaults.standard.integer(forKey: Utility.KEY_DEFAULT_VIEW_MODE)
         viewConfig.selectedSegmentIndex = viewMode
         if viewMode == 0 {
@@ -38,7 +38,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             collectionView.isHidden = false
         }
         
-        self.navigationItem.title = "Movies"
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self
@@ -176,7 +175,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         var url: URL!
         if (searchText.isEmpty){
-            url = URL(string: "\(Utility.BASE_URL_NOW_PLAYING)?\(Utility.API_KEY)")
+            url = URL(string: "\(Utility.BASE_URL)\(endPoint)?\(Utility.API_KEY)")
         } else {
             url = URL(string: "\(Utility.BASE_URL_SEARCH)?\(Utility.API_KEY)&query=\(searchText)")
         }
@@ -199,6 +198,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        searchView.endEditing(true)
         let destinationViewController = segue.destination as! MovieDetailsViewController
         if viewConfig.selectedSegmentIndex == 0 {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
