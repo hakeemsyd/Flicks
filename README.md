@@ -37,6 +37,8 @@ Here's a walkthrough of implemented user stories:
 
 ## Optional Features Walkthrough
 
+Here's another iteration which includes optional features.
+
 <img src='https://github.com/hakeemsyd/Flicks/blob/master/gif/assignment1.1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
