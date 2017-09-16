@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "MovieNavigationController") as! UINavigationController
         let topRatedViewController = topRatedNavigationController.topViewController as! MoviesViewController
         topRatedViewController.endPoint = "top_rated"
-        topRatedNavigationController.title = "Top Rated"
+        topRatedViewController.title = "Top Rated"
         topRatedViewController.tabBarItem.title = "Top Rated"
         topRatedNavigationController.view.backgroundColor = UIColor.purple
         topRatedViewController.tabBarItem.image = UIImage(named: "star")
