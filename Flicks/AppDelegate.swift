@@ -22,17 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "MovieNavigationController") as! UINavigationController
         let nowPlayingViewController = nowPlayingNavigationController.topViewController as! MoviesViewController
         nowPlayingViewController.endPoint = "now_playing"
+        nowPlayingViewController.title = "Now Playing"
         nowPlayingViewController.tabBarItem.title = "Now Playing"
         nowPlayingNavigationController.view.backgroundColor = UIColor.orange
-        //nowPlayingViewController.tabBarItem.image = UIImage(named: "heart")
+        nowPlayingViewController.tabBarItem.image = UIImage(named: "movie")
         
         let topRatedNavigationController = storyboard.instantiateViewController(withIdentifier:
             "MovieNavigationController") as! UINavigationController
         let topRatedViewController = topRatedNavigationController.topViewController as! MoviesViewController
         topRatedViewController.endPoint = "top_rated"
+        topRatedNavigationController.title = "Top Rated"
         topRatedViewController.tabBarItem.title = "Top Rated"
         topRatedNavigationController.view.backgroundColor = UIColor.purple
-        //nowPlayingViewController.tabBarItem.image = UIImage(named: "heart")
+        topRatedViewController.tabBarItem.image = UIImage(named: "star")
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]

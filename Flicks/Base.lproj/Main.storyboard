@@ -116,6 +116,7 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.9976617693901062" green="0.70297569036483765" blue="0.020845862105488777" alpha="0.8008347602739726" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" id="d7f-gg-FQc">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="u5z-c9-tc7">

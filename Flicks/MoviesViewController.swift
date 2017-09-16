@@ -28,7 +28,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let viewMode = UserDefaults.standard.integer(forKey: Utility.KEY_DEFAULT_VIEW_MODE)
         viewConfig.selectedSegmentIndex = viewMode
         if viewMode == 0 {
@@ -39,7 +38,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             collectionView.isHidden = false
         }
         
-        self.navigationItem.title = "Movies"
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchView.delegate = self
@@ -179,7 +177,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if (searchText.isEmpty){
             url = URL(string: "\(Utility.BASE_URL)\(endPoint)?\(Utility.API_KEY)")
         } else {
-            url = URL(string: "\(Utility.BASE_URL_SEARCH)\(endPoint)?\(Utility.API_KEY)&query=\(searchText)")
+            url = URL(string: "\(Utility.BASE_URL_SEARCH)?\(Utility.API_KEY)&query=\(searchText)")
         }
         
         if (url != nil){
@@ -200,14 +198,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        searchView.endEditing(true)
         let destinationViewController = segue.destination as! MovieDetailsViewController
-        
-        /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let movieNavigationViewController = storyboard.instantiateViewController(withIdentifier:
-            "MovieNavigationController") as! UINavigationController
-        let nowPlayingViewController = movieNavigationViewController.topViewController as! MoviesViewController*/
-        
-        
         if viewConfig.selectedSegmentIndex == 0 {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destinationViewController.mMovie = mMovies[indexPath.row] as! [String : Any]
